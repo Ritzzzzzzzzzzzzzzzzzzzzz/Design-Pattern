@@ -1,0 +1,61 @@
+using System;
+
+// Step 1: Create a common interface for all products
+public interface IVehicle
+{
+    void ShowDetails();
+}
+
+// Step 2: Implement Concrete Classes
+public class Car : IVehicle
+{
+    public void ShowDetails()
+    {
+        Console.WriteLine("Car: A comfortable four-wheeler.");
+    }
+}
+
+public class Bike : IVehicle
+{
+    public void ShowDetails()
+    {
+        Console.WriteLine("Bike: A fast and fuel-efficient two-wheeler.");
+    }
+}
+
+// Step 3: Implement Factory Class
+public class VehicleFactory
+{
+    public static IVehicle GetVehicle(string type)
+    {
+        switch (type.ToLower())
+        {
+            case "car":
+                return new Car();
+            case "bike":
+                return new Bike();
+            default:
+                throw new ArgumentException("Invalid vehicle type");
+        }
+    }
+}
+
+// Step 4: Main Program to use the Factory
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter vehicle type (Car/Bike): ");
+        string vehicleType = Console.ReadLine();
+
+        try
+        {
+            IVehicle vehicle = VehicleFactory.GetVehicle(vehicleType);
+            vehicle.ShowDetails();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+}

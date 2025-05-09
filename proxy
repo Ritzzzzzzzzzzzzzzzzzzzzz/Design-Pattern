@@ -1,0 +1,72 @@
+using System;
+
+// Step 1: Common interface for Real and Proxy objects
+public interface IImage
+{
+    void Display();
+}
+
+// Step 2: Real object that simulates an expensive operation
+public class RealImage : IImage
+{
+    private string _fileName;
+
+    public RealImage(string fileName)
+    {
+        _fileName = fileName;
+        LoadImageFromDisk();
+    }
+
+    private void LoadImageFromDisk()
+    {
+        Console.WriteLine("Loading image: " + _fileName);
+    }
+
+    public void Display()
+    {
+        Console.WriteLine("Displaying image: " + _fileName);
+    }
+}
+
+// Step 3: Proxy class that controls access to RealImage
+public class ProxyImage : IImage
+{
+    private RealImage _realImage;
+    private string _fileName;
+
+    public ProxyImage(string fileName)
+    {
+        _fileName = fileName;
+    }
+
+    public void Display()
+    {
+        // Lazy-loading: Only loads when Display() is called
+        if (_realImage == null)
+        {
+            _realImage = new RealImage(_fileName);
+        }
+        _realImage.Display();
+    }
+}
+
+// Step 4: Main Program to use Proxy
+class Program
+{
+    static void Main()
+    {
+        IImage image1 = new ProxyImage("test_image1.jpg");
+        IImage image2 = new ProxyImage("test_image2.jpg");
+
+        // First call will load and display
+        image1.Display();
+        Console.WriteLine();
+        
+        // Second call only displays, avoiding reloading
+        image1.Display();
+        Console.WriteLine();
+
+        // Another image instance
+        image2.Display();
+    }
+}

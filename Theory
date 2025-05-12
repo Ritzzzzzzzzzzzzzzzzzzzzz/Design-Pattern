@@ -1,0 +1,7 @@
+The Singleton pattern is a creational design pattern that ensures a class has only one instance and provides a global point of access to that instance. It restricts the instantiation of a class to a single object.
+
+The Proxy pattern is a structural design pattern that provides a placeholder for another object to control access to it. The proxy acts as an intermediary, intercepting calls to the original object and potentially adding functionality before or after delegating the call.
+
+The Command pattern is a behavioral design pattern that turns a request into a stand-alone object that contains all the information about the request. This encapsulation allows you to parameterize clients with different requests, queue or log requests, and support undoable operations.
+
+The Factory pattern is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. It deals with the problem of creating objects without specifying the exact class of object that will be created.
